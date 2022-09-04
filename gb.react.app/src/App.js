@@ -1,13 +1,14 @@
 import './App.css';
 import MessageList from './Message/Message-list';
+import ChatList from './Chat/ChatList';
+import {FormGroup} from "@mui/material";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <FormGroup row>
+        <ChatList/>
         <MessageList/>
-      </header>
-    </div>
+    </FormGroup>
   );
 }
 

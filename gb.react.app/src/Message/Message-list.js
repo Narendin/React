@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Message from "./Message";
+import {TextField, FormGroup, InputAdornment } from "@mui/material";
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 function MessageList() {
     const [messageList, setMessageList] = useState([]);
     const [value, setValue] = useState("");
+    const inputRef = useRef();
 
     const addMessage = () => {
         setMessageList(prev => [...prev, { author: "Admin", text: value }]);
         setValue("");
+        inputRef.current.focus();
     }
 
     useEffect(() => {
@@ -17,7 +21,7 @@ function MessageList() {
         if (lastMsg && lastMsg.author === "Admin") {
             timer = setTimeout(() => {
                 setMessageList(prev => [...prev, { author: "Bot", text: "Answer text" }]);
-            }, 1500);
+            }, 500);
 
             return () => {
                 clearInterval(timer);
@@ -25,17 +29,38 @@ function MessageList() {
         }
     }, [messageList]);
 
+    const PressInput = ({ code }) => {
+        if (code === "Enter") {
+            addMessage();
+        }
+    };
+
     return (
         <>
-            <div> 
+            <FormGroup>
                 {messageList.map((message, index) => (
                     <Message message={message} key={index}/>
                 ))}
-            </div>
-            <div>
-                <input type="text" value={value} onChange={(e) => setValue(e.target.value)}/>
-                <button className="counter-button" onClick={addMessage}>Click!</button>
-            </div>
+                <FormGroup row>
+                    <TextField 
+                        inputRef={inputRef}
+                        id="outlined-basic" 
+                        label="Message" 
+                        variant="outlined" 
+                        autoFocus
+                        value={value} 
+                        onChange={(e) => setValue(e.target.value)}
+                        InputProps={
+                            {
+                                endAdornment: 
+                                    <InputAdornment position="end">
+                                        {value && <ArrowForwardIcon onClick={addMessage} />}
+                                    </InputAdornment>
+                            }
+                        } 
+                        onKeyPress={PressInput} />
+                </FormGroup>
+            </FormGroup>
         </>
     )
 }

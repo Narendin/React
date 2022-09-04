@@ -1,9 +1,10 @@
 import './Message.css'
+import {ListItem} from "@mui/material";
 
 function Message({message}) {
     return ( 
     <div className="Message">
-        <h3>{message.author} : {message.text}</h3>
+        <ListItem>{message.author} : {message.text}</ListItem>
     </div>
     );
 }
