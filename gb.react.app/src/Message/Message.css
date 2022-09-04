@@ -1,23 +1,6 @@
 .Message {
   color: red;
-  letter-spacing: 5px;
-  animation: Message-spring infinite 3s linear;
-}
-
-@keyframes Message-spring {
-  0% {
-    letter-spacing: 0;
-  }
-  
-  50% {
-    letter-spacing: 1em;
-  }
-  
-  85% {
-    letter-spacing: -0.25em;
-  }
-  
-  100% {
-    letter-spacing: 0;
-  }
+  letter-spacing: 4px;
+  font-size: medium;
+  line-height: 0.5em;
 }

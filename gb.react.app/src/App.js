@@ -1,12 +1,11 @@
 import './App.css';
-import Message from './Message/Message';
+import MessageList from './Message/Message-list';
 
-function App(props) {
+function App() {
   return (
     <div className="App">
       <header className="App-header">
-        My First React App
-        <Message text={'Message text'}/>
+        <MessageList/>
       </header>
     </div>
   );
